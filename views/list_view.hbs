@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="mt-10">        
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h2>Buku Telepon</h2>
+                </div>
+                <div class="col-6">
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal_add">Tambah</a>
+                </div>
+            </div>
+            <table class="table table-hover table-striped" id="list_telepon">
+                <thead>
+                    <th>ID Pengguna</th>
+                    <th>Nama Pengguna</th>
+                    <th>No Telepon</th>
+                    <th>Alamat</th>
+                    <th>Provider</th>
+                    <th>Aksi</th>
+                </thead>
+                <tbody>
+                    {{#each result}}
+                    <tr>
+                        <td>{{ id }}</td>
+                        <td>{{ pengguna }}</td>
+                        <td>{{ no_telepon }}</td>
+                        <td>{{ alamat }}</td>
+                        <td>{{ provider }}</td>
+                        <td>
+                            <a href="javascript:void(0);" class="btn btn-info edit"  data-toggle="modal" data-target="#modal_edit" data-id="{{ id }}" data-pengguna="{{ pengguna }}" data-no_telepon="{{ no_telepon }}" data-alamat="{{ alamat }}" data-provider="{{ provider }}">Ubah</a>
+                            <a href="javascript:void(0);" class="btn btn-danger delete" data-toggle="modal" data-target="#modal_delete" data-id="{{ id }}" >Hapus</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{!-- #modal_add --}}
+    <form action="/insert" method="post">
+        <div class="modal fade" id="modal_add" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Buku Telepon</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="pengguna" placeholder="Nama pengguna">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="no_telepon" placeholder="Nomor telepon">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="provider" placeholder="Provider">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Batal</button>
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {{!-- modal_edit --}}
+    <form action="/update" method="post">
+        <div class="modal fade" id="modal_edit" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ubah Buku Telepon</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control pengguna" id="pengguna_edit" name="pengguna" placeholder="Nama pengguna">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control no_telepon" id="no_telepon_edit" name="no_telepon" placeholder="Nomor telepon">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control alamat" id="alamat_edit" name="alamat" placeholder="Alamat">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control provider" id="provider_edit" name="provider" placeholder="Provider">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="id_edit" name="id" class="id">
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Batal</button>
+                            <button class="btn btn-primary" type="submit">Ubah</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {{!-- modal-delete --}}
+    <form action="/delete" method="POST">
+        <div class="modal fade" id="modal_delete" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Hapus Kontak</h2>
+                        <button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <strong>Anda yakin ingin menghapus kontak ini?</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" class="form-control" name="id" id="id_delete">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-danger" type="submit">Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        const table = document.querySelector('tbody').rows;
+        const modal_edit = document.getElementById('modal_edit');
+        
+        [].forEach.call(table, (item, index) => {
+            let edit_btn = table[index].lastElementChild.firstElementChild;
+            let del_btn = table[index].lastElementChild.lastElementChild;
+            let curr_row = table[index];
+            let edit_handler = row => {
+                return () => {                    
+                    let id_field = document.getElementById('id_edit').value = edit_btn.dataset.id;
+                    let pengguna_field = document.getElementById('pengguna_edit').value = edit_btn.dataset.pengguna;
+                    let no_telepon_field = document.getElementById('no_telepon_edit').value = edit_btn.dataset.no_telepon;
+                    let alamat_field = document.getElementById('alamat_edit').value = edit_btn.dataset.alamat;
+                    let provider_field = document.getElementById('provider_edit').value = edit_btn.dataset.provider;
+                }
+            }
+            let delete_handler = row => {
+                return () => {
+                    let id = document.getElementById('id_delete').value = del_btn.dataset.id;
+                }
+            }
+            edit_btn.onclick = edit_handler(curr_row);
+            del_btn.onclick = delete_handler(curr_row);
+        });
+    </script>
+
+</body>
+</html>
