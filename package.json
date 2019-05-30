@@ -15,10 +15,18 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
+    "crypto": "^1.0.1",
     "express": "^4.17.0",
+    "express-formidable": "^1.2.0",
+    "free-mobile-sms-api": "^1.0.4",
     "hbs": "^4.0.4",
     "mysql": "^2.17.1",
-    "react-router-dom": "^5.0.0"
+    "nexmo": "^2.4.1",
+    "react-router-dom": "^5.0.0",
+    "sms-gateway-nodejs": "^0.1.0",
+    "textbelt": "0.0.4",
+    "xlsx": "^0.14.3",
+    "zenziva-sms": "^1.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
