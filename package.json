@@ -16,7 +16,7 @@
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
     "crypto": "^1.0.1",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "express-formidable": "^1.2.0",
     "free-mobile-sms-api": "^1.0.4",
     "hbs": "^4.0.4",
